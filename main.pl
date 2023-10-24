@@ -332,6 +332,23 @@ chatbotAddFlow(Chatbot, Flow, NuevoChatbot) :-
 % Metas Secundarias: chatHistory.
 chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,Usuarios,UsuarioLogeado,Fecha,[Nombre,InitialChatbotCodeLink,Chatbot,Usuarios,UsuarioLogeado,Fecha] ).
 
+%MODIFICADOR
+% Descripcion: Predicado para modificar el usuario del chathistory.
+% Dominio: Sistema X NuevoUsuario X NuevoSistema.
+% Metas Primarias: setUsuarios.
+% Metas Secundarias: chatHistory.
+setUsuarios(Sistema, NuevoUsuario, NuevoSistema) :-
+    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,_,UsuarioLogeado,Fecha,Sistema).
+    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,NuevoUsuario,UsuarioLogeado,Fecha,NuevoSistema ).
+
+% Descripcion: Predicado para modificar el usuarioLogeado del chathistory.
+% Dominio: Sistema X NuevoUsuarioLogeado X NuevoSistema.
+% Metas Primarias: setUsuarioLogeado.
+% Metas Secundarias: chatHistory.
+setUsuarioLogeado(Sistema, NuevoUsuarioLogeado, NuevoSistema) :-
+    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,Usuario,_,Fecha,Sistema).
+    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,Usuario,NuevoUsuarioLogeado,Fecha,NuevoSistema).
+
 %-----------------------------------------------------------------------------------------------------------------------------------
 
 %CONSTRUCTOR
@@ -478,58 +495,96 @@ systemLogout(Sistema, NuevoSistema) :-
     getUsuarioLogeadoSystem(Sistema,UsuarioLogeado),
     chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,Usuarios,[ ],Fecha, NuevoSistema),!.
 
-setUsuarios(Sistema, NuevoUsuario, NuevoSistema) :-
-    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,_,UsuarioLogeado,Fecha,Sistema).
-    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,NuevoUsuario,UsuarioLogeado,Fecha,NuevoSistema ).
-
-setUsuarioLogeado(Sistema, NuevoUsuarioLogeado, NuevoSistema) :-
-    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,Usuario,_,Fecha,Sistema).
-    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,Usuario,NuevoUsuarioLogeado,Fecha,NuevoSistema).
-
 %---------------------------------------------------------------------------------------
 
-% Selectores System 
-
+%SELECTORES
+% Descripcion: Predicado que obtiene el Nombre de un sistema dado.
+% Dominio: Sistema X Nombre.
+% Metas Primarias: getNombreSystem.
+% Metas Secundarias: System.
 getNombreSystem(System, Nombre) :-
     System = [Nombre, _, _, _, _, _].
 
+% Descripcion: Predicado que obtiene el InitialChatbotCodeLink de un sistema dado.
+% Dominio: Sistema X InitialChatbotCodeLink.
+% Metas Primarias: getInitialChatbotCodeLinkSystem.
+% Metas Secundarias: System.
 getInitialChatbotCodeLinkSystem(System, InitialChatbotCodeLink) :-
     System = [_, InitialChatbotCodeLink, _, _, _, _].
 
+% Descripcion: Predicado que obtiene el Chatbot de un sistema dado.
+% Dominio: Sistema X Chatbot.
+% Metas Primarias: getChatbotSystem.
+% Metas Secundarias: System.
 getChatbotSystem(System, Chatbot) :-
     System = [_, _, Chatbot, _, _, _].
 
+% Descripcion: Predicado que obtiene el Usuarios de un sistema dado.
+% Dominio: Sistema X Usuarios.
+% Metas Primarias: getUsuariosSystem.
+% Metas Secundarias: System.
 getUsuariosSystem(System, Usuarios) :-
     System = [_, _, _, Usuarios, _, _].
 
+% Descripcion: Predicado que obtiene el UsuarioLogeado de un sistema dado.
+% Dominio: Sistema X UsuarioLogeado.
+% Metas Primarias: getUsuarioLogeadoSystem.
+% Metas Secundarias: System.
 getUsuarioLogeadoSystem(System, UsuarioLogeado) :-
     System = [_, _, _, _, UsuarioLogeado, _].
 
+% Descripcion: Predicado que obtiene la Fecha de un sistema dado.
+% Dominio: Sistema X Fecha.
+% Metas Primarias: getFechaSystem.
+% Metas Secundarias: System.
 getFechaSystem(System, Fecha) :-
     System = [_, _, _, _, _, Fecha].
 
-% Modificadores System 
-
+%MODIFICADOR
+% Descripcion: Predicado para cambiar el nombre del usuario dentro del sistema, basandonos en chatHistory.
+% Dominio: Sistema X NuevoNombre X NuevoSistema.
+% Metas Primarias: setNombreSystem.
+% Metas Secundarias: System , NuevoSystem.
 setNombreSystem(System, NuevoNombre, NuevoSystem) :-
     System = [_, InitialChatbotCodeLink, Chatbot, Usuarios, UsuarioLogeado, Fecha],
     NuevoSystem = [NuevoNombre, InitialChatbotCodeLink, Chatbot, Usuarios, UsuarioLogeado, Fecha].
 
+% Descripcion: Predicado para cambiar el InitialChatbotCodeLink del usuario dentro del sistema, basandonos en chatHistory.
+% Dominio: Sistema X NuevoInitialChatbotCodeLink X NuevoSistema.
+% Metas Primarias: setInitialChatbotCodeLinkSystem.
+% Metas Secundarias: System , NuevoSystem.
 setInitialChatbotCodeLinkSystem(System, NuevoInitialChatbotCodeLink, NuevoSystem) :-
     System = [Nombre, _, Chatbot, Usuarios, UsuarioLogeado, Fecha],
     NuevoSystem = [Nombre, NuevoInitialChatbotCodeLink, Chatbot, Usuarios, UsuarioLogeado, Fecha].
 
+% Descripcion: Predicado para cambiar el Chatbot del usuario dentro del sistema, basandonos en chatHistory.
+% Dominio: Sistema X NuevoChatbot X NuevoSistema.
+% Metas Primarias: setChatbotSystem.
+% Metas Secundarias: System , NuevoSystem.
 setChatbotSystem(System, NuevoChatbot, NuevoSystem) :-
     System = [Nombre, InitialChatbotCodeLink, _, Usuarios, UsuarioLogeado, Fecha],
     NuevoSystem = [Nombre, InitialChatbotCodeLink, NuevoChatbot, Usuarios, UsuarioLogeado, Fecha].
 
+% Descripcion: Predicado para cambiar el Usuario del usuario dentro del sistema, basandonos en chatHistory.
+% Dominio: Sistema X NuevoUsuarios X NuevoSistema.
+% Metas Primarias: setUsuariosSystem.
+% Metas Secundarias: System , NuevoSystem.
 setUsuariosSystem(System, NuevosUsuarios, NuevoSystem) :-
     System = [Nombre, InitialChatbotCodeLink, Chatbot, _, UsuarioLogeado, Fecha],
     NuevoSystem = [Nombre, InitialChatbotCodeLink, Chatbot, NuevosUsuarios, UsuarioLogeado, Fecha].
 
+% Descripcion: Predicado para cambiar el UsuarioLogeado del usuario dentro del sistema, basandonos en chatHistory.
+% Dominio: Sistema X NuevoUsuarioLogeado X NuevoSistema.
+% Metas Primarias: setUsuarioLogeadoSystem.
+% Metas Secundarias: System , NuevoSystem.
 setUsuarioLogeadoSystem(System, NuevoUsuarioLogeado, NuevoSystem) :-
     System = [Nombre, InitialChatbotCodeLink, Chatbot, Usuarios, _, Fecha],
     NuevoSystem = [Nombre, InitialChatbotCodeLink, Chatbot, Usuarios, NuevoUsuarioLogeado, Fecha].
 
+% Descripcion: Predicado para cambiar la Fecha del usuario dentro del sistema, basandonos en chatHistory.
+% Dominio: Sistema X NuevaFecha X NuevoSistema.
+% Metas Primarias: setFechaSystem.
+% Metas Secundarias: System , NuevoSystem.
 setFechaSystem(System, NuevaFecha, NuevoSystem) :-
     System = [Nombre, InitialChatbotCodeLink, Chatbot, Usuarios, UsuarioLogeado, _],
     NuevoSystem = [Nombre, InitialChatbotCodeLink, Chatbot, Usuarios, UsuarioLogeado, NuevaFecha].
