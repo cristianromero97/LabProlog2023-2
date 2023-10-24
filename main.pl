@@ -325,14 +325,21 @@ chatbotAddFlow(Chatbot, Flow, NuevoChatbot) :-
 
 %-----------------------------------------------------------------------------------------------------------------------------------
 
+%CONSTRUCTOR
+% Descripcion: Predicado para generar un ChatHistory.
+% Dominio: Nombre X InitialChatbotCodeLink X Chatbot X Usuarios X UsuarioLogeado X Fecha X ChatHistory
+% Metas Primarias: chatHistory.
+% Metas Secundarias: chatHistory.
 chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,Usuarios,UsuarioLogeado,Fecha,[Nombre,InitialChatbotCodeLink,Chatbot,Usuarios,UsuarioLogeado,Fecha] ).
 
+%-----------------------------------------------------------------------------------------------------------------------------------
 
+%CONSTRUCTOR
 % Descripcion: Predicado que crea un sistema vacío con un nombre específico.
 % Dominio: NombreSistema X InitialChatbotCodeLink X Chatbot X Sistema.
 % Metas Primarias: system.
 % Metas Secundarias: filterChatbot, removeDuplicates, ChatHistory.
-    system(Nombre,InitialChatbotCodeLink,Chatbot, Sistema) :-
+system(Nombre,InitialChatbotCodeLink,Chatbot, Sistema) :-
     string(Nombre), number(InitialChatbotCodeLink),
     filterChatbot(Chatbot, InitialChatbotCodeLink, FilteredChatbot),
     removeDuplicates(FilteredChatbot,UniqueChatbot),
@@ -341,16 +348,27 @@ chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,Usuarios,UsuarioLogeado,Fecha,
     chatHistory(Nombre,InitialChatbotCodeLink,UniqueChatbot,[],[],Fecha, Sistema),!.
     %filesystem(Nombre, [], [], [], [], [], [], [], Sistema),!.
 
+% Descripcion: Predicado filtrador de sistea para filtrar chatbot en base al InitialChatbotCodeLink y el ID.
+% Dominio: list x list x list.
+% Metas Primarias: filterChatbot.
+% Metas Secundarias: filterChatbot, chatbot , chatbotId.
 filterChatbot([], _, []).
 filterChatbot([Chatbot|RestChatbot], InitialChatbotCodeLink, FilteredChatbot) :-
    Chatbot = [ChatbotId|_],
    (ChatbotId = InitialChatbotCodeLink -> FilteredChatbot = [Chatbot|RestFilteredChatbot] ; FilteredChatbot = RestFilteredChatbot),
    filterChatbot(RestChatbot, InitialChatbotCodeLink, RestFilteredChatbot).
 
+%MODIFICADOR
+% Descripcion: Predicado para añadir un nuevo chatbot a un sistema creado.
+% Dominio: Sistema X Chatbot X NuevoSistema.
+% Metas Primarias: systemAddChatbot.
+% Metas Secundarias: removeDuplicates, filterChatbot , append.
 systemAddChatbot(Sistema, Chatbot, NuevoSistema) :-
     append(Sistema,[Chatbot],NuevoSistema),
     filterChatbot([Chatbot],InitialChatbotCodeLink, FilteredChatbot),
     removeDuplicates(FilteredChatbot,UniqueChatbot).
+
+%-----------------------------------------------------------------------------------------------------------------------------------
 
 usuario(NombreUsuario,[NombreUsuario]).
 
@@ -368,6 +386,8 @@ getUsuarios(Sistema, Usuario):-
     usuario([_|Usuario],Sistema).
 getUsuarios(Sistema, Usuarios) :-
     findall(NombreUsuario, usuario(NombreUsuario, Sistema), Usuarios).
+
+%-----------------------------------------------------------------------------------------------------------------------------------
 
 % Descripcion: Predicado que registra un usuario en un sistema.
 % Dominio: Sistema X NombreUsuario X NuevoSistema.
