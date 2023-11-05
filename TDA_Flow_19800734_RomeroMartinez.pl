@@ -7,7 +7,7 @@
 % NOMBRE: Cristian Alexis Romero Martinez
 % RUT: 19.800.734-k 
 % CARRERA: Ingenieria en Ejecucion en Informatica
-% VERSIÓN SWI-PROLOG: 8.4.2
+% VERSIÓN SWI-PROLOG: 9.0
 
 %HECHOS
 

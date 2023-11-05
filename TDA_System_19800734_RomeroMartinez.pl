@@ -7,7 +7,7 @@
 % NOMBRE: Cristian Alexis Romero Martinez
 % RUT: 19.800.734-k 
 % CARRERA: Ingenieria en Ejecucion en Informatica
-% VERSIÓN SWI-PROLOG: 8.4.2
+% VERSIÓN SWI-PROLOG: 9.0
 
 %HECHOS
 
@@ -34,8 +34,8 @@ system(Nombre,InitialChatbotCodeLink,Chatbot, Sistema) :-
     removeDuplicates(FilteredChatbot,UniqueChatbot),
     mi_fecha(Fecha),
     %Sistema = [Nombre, InitialChatbotCodeLink, UniqueChatbot],
-    chatHistory(Nombre,InitialChatbotCodeLink,UniqueChatbot,[],[],Fecha, Sistema),!.
-    %filesystem(Nombre, [], [], [], [], [], [], [], Sistema),!.
+    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,[],[],Fecha, Sistema),!.
+    %chatHistory(Nombre,InitialChatbotCodeLink,UniqueChatbot,[],[],Fecha, Sistema),!. %version para filtros
 
 % Descripcion: Predicado filtrador de sistea para filtrar chatbot en base al InitialChatbotCodeLink y el ID.
 % Dominio: list x list x list.
