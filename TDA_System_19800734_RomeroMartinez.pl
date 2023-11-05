@@ -15,6 +15,14 @@
 
 %PREDICADOS
 
+%IMPORTACIONES DE ARCHIVOS
+:-include(tda_ChatHistory_19800734_RomeroMartinez).
+:-include(tda_Chatbot_19800734_RomeroMartinez).
+:-include(tda_User_19800734_RomeroMartinez).
+:- use_module(library(date)).
+%:-use_module(tda_User_19800734_RomeroMartinez,[usuario/2, addUserToUsers/3,getUsuarios/2,getNombreUsuario/2,setNombreUsuario/2,addUsuario/3]).
+
+
 %CONSTRUCTOR
 % Descripcion: Predicado que crea un sistema vacío con un nombre específico.
 % Dominio: NombreSistema X InitialChatbotCodeLink X Chatbot X Sistema.

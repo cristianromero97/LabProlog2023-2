@@ -16,19 +16,24 @@
 %PREDICADOS
 
 %IMPORTACION DE LIBRERIAS PARA FECHA
+
 :- use_module(library(date)).
 
 % Descripcion: Predicado que construye una fecha en el siguiente formato (Dia,Mes,Año).
 % Dominio: Fecha.
 % Metas Primarias: Fecha.
 % Metas Secundarias: list.
-mi_fecha(Fecha) :-
+% Error al ejecutar: Por alguna razon para sistema Windows el predicado fecha tiene un error, esto no sucede en otros entornos como prolog online, linux o mac.
+% El error es un error de sintaxis o que el programa no encuentra la meta definida, lo he revisado varias veces y no encontre a que se refiere esto ultimo, ya que aun asi funciona en otros entornos.
+% Para evitar ese error y verlo en windows, se debe documentar el predicado de mi_fecha, en el caso de chathistory se debe borrar la variable Fecha,con esto deberia correr sin mostrar la fecha para system y chathistory.
+mi_fecha(Fecha):-
     get_time(Stamp),
     stamp_date_time(Stamp, DateTime, 'UTC'),
     date_time_value(year, DateTime, Año),
     date_time_value(month, DateTime, Mes),
     date_time_value(day, DateTime, Día),
     Fecha = (Día, Mes, Año).
+
 
 %-----------------------------------------------------------------------------------------------------------------------------------
 
@@ -360,7 +365,7 @@ system(Nombre,InitialChatbotCodeLink,Chatbot, Sistema) :-
     string(Nombre), number(InitialChatbotCodeLink),
     filterChatbot(Chatbot, InitialChatbotCodeLink, FilteredChatbot),
     removeDuplicates(FilteredChatbot,UniqueChatbot),
-    mi_fecha(Fecha),
+    mi_fecha(Fecha), % Si hay errores poner como comente esta parte, no se vera la fecha pero no saltara el error
     %Sistema = [Nombre, InitialChatbotCodeLink, UniqueChatbot],
     chatHistory(Nombre,InitialChatbotCodeLink,UniqueChatbot,[],[],Fecha, Sistema),!.
     %filesystem(Nombre, [], [], [], [], [], [], [], Sistema),!.

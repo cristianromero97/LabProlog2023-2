@@ -15,6 +15,12 @@
 
 %PREDICADOS
 
+%IMPORTACIONES DE ARCHIVOS (ambas formas son equivalentes).
+% :-use_module(tda_Option_19800734_RomeroMartinez,[option/6]).
+% :-use_module(tda_Flow_19800734_RomeroMartinez,[flow/4,removeDuplicates/2]).
+% :-include(tda_Option_19800734_RomeroMartinez).
+:-include(tda_Flow_19800734_RomeroMartinez).
+
 %CONSTRUCTOR
 % Descripcion: Predicado constructor que crea un chatbot dado un flujo.
 % Dominio: ChatbotId X setNombreChatbot X MensajeBienvenida X StartFlowInitial X Flows X Chatbot.

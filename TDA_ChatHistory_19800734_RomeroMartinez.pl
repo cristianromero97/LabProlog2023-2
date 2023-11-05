@@ -15,8 +15,9 @@
 
 %PREDICADOS
 
-%IMPORTACION DE LIBRERIAS PARA FECHA
+%IMPORTACION DE LIBRERIAS PARA FECHA Y ARCHIVOS
 :- use_module(library(date)).
+%:-include(tda_System_19800734_RomeroMartinez).
 
 % Descripcion: Predicado que construye una fecha en el siguiente formato (Dia,Mes,Año).
 % Dominio: Fecha.

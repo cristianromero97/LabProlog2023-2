@@ -15,6 +15,10 @@
 
 %PREDICADOS
 
+%IMPORTACIONES DE ARCHIVOS (ambas formas son equivalentes).
+%:-use_module(tda_option_19800734_RomeroMartinez,[option/6]).
+:-include(tda_Option_19800734_RomeroMartinez).
+
 %CONSTRUCTOR
 % Descripcion: Predicado constructor que crea un flujo dada una opcion.
 % Dominio: Id X Msg X Option X Flow.

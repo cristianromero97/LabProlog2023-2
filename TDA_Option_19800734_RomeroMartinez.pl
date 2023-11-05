@@ -15,6 +15,7 @@
 
 %PREDICADOS
 
+%:-module(tda_Option_19800734_RomeroMartinez,[option/6]).
 
 %CONSTRUCTOR
 % Descripcion: Predicado constructor que crea una opcion.

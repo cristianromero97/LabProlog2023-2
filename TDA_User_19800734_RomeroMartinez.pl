@@ -15,6 +15,8 @@
 
 %PREDICADOS
 
+%:- module(tda_user_19800734_RomeroMartinez, [usuario/2, addUserToUsers/3,getUsuarios/2,getNombreUsuario/2,setNombreUsuario/2,addUsuario/3]).
+
 %CONSTRUCTOR
 % Descripcion: Predicado para crear un usuario y asignarlo a una lista
 % Dominio: NombreUsuario x list.
