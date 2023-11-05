@@ -613,21 +613,31 @@ opcionPorPalabraClave(PalabraClave, Flujo, Opcion) :-
 % Obtén el Chatbot del sistema
 getChatbotSistema([_, _, Chatbot, _, _, _], Chatbot).
 
-% Predicado principal
+% Descripcion: Predicado que permite interactuar con un chatbot
+% Dominio: system X mensaje (string) X system.
+% Metas Primarias: system_tal_rec.
+% Metas Secundarias: getchatbot,getFechaSystem,getChatbotSystem,isUsuarioLogeado,system.
 system_tal_rec(Sistema, PalabraClave, NuevoSistema) :-
     isUsuarioLogeado(Sistema), % Verifica si el usuario ha iniciado sesión
     getChatbotSistema(Sistema, Chatbot), % Obtén el chatbot del sistema
     getFechaSystem(Sistema, Fecha), % Obtén la fecha del sistema
     getChatbotFlows(Chatbot, Flows), % Obtiene los flujos del chatbot
-
     % Busca la opción correspondiente a la palabra clave en los flujos del chatbot
     findall([Id, Msg, [Opcion]], (member(Flujo, Flows), opcionPorPalabraClave(PalabraClave, Flujo, Opcion), getIdFlow(Flujo, Id), getMsgFlow(Flujo, Msg)), OpcionesEnFlujos),
-
     % Elimina las opciones duplicadas
     flatten(OpcionesEnFlujos, OpcionesFlatten),
     list_to_set(OpcionesFlatten, OpcionesUnicas),
-
     % Crea un nuevo sistema con las opciones encontradas
     system(getNombreSystem(Sistema), getInitialChatbotCodeLinkSystem(Sistema), Chatbot, getUsuariosSystem(Sistema), getUsuarioLogeadoSystem(Sistema), Fecha, NuevoSistema).
+
+%Funcion extra para system simulate
+% Descripcion: Predicado para generar numeros aleatorios.
+% Dominio: Xn x Xn1
+% Metas Primarias: mulTemp.
+% Metas Secundarias: MulTemp, Myrandom.
+myRandom(Xn, Xn1):-
+    mulTemp is 1103515245 * Xn,
+    sumTemp is mulTemp + 12345,
+    Xn1 is sumTemp mod 2147483648.
 
 
