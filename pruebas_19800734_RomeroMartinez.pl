@@ -11,7 +11,7 @@
 
 %IMPORTACION 
 %Ambos archivos son validos
-:-include(main_19800734_RomeroMartinez.pl).
+:-include(main_19800734_RomeroMartinez).
 %:-include(tda_system_19800734_RomeroMartinez).
 
 %El siguiente programa contiene los Script N1 y N2 del laboratorio Scheme adaptados a su formato Prolog
