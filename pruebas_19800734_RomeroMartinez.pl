@@ -9,20 +9,27 @@
 % CARRERA: Ingenieria en Ejecucion en Informatica
 % VERSIÓN SWI-PROLOG: 9.0
 
-%IMPORTACION 
+% IMPORTACION 
 %Ambos archivos son validos
 :-include(main_19800734_RomeroMartinez).
 %:-include(tda_system_19800734_RomeroMartinez).
 
+% INSTRUCCIONES INICIALES
 %El siguiente programa contiene los Script N1 y N2 del laboratorio Scheme adaptados a su formato Prolog
+%Para ello existe una version personal y la version final entregada por el profesor
+%Ambas versiones tienen algunos ajustes para permitirle un mejor funcionamiento segun mi implementacion
 %Ademas se entregaran 3 ejemplos para cada TDA al igual que el Pruebas anterior
 
-%SCRIPT DE PRUEBAS Nº1 
+% READAPTANDO CODIGOS DE SCHEME A SU VERSION PROLOG
+
+%SCRIPT DE PRUEBAS Nº1 LABORTARIO DE SCHEME ADAPTADO A PROLOG
 %Adapte un poco este script para hacer funcionar mi implementacion
 %He dejado algunas cuantas instrucciones comentadas a lo largo de la implementacion
 %Favor de seguir al pie de la letra dichas instrucciones
-%Para el caso de system, puede surgir un erro en sistemas Windows debido a la implementacion de mi_fecha
+%Para el caso de system, puede surgir un error en sistemas Windows debido a la implementacion de mi_fecha
 %Dicho error es aislado y no ocure en otros entornos como SWI-Prolog online, mac o linux.
+%Esta es una readaptacion personal el script entregado por el profesor se encuentra mas abajo 
+%Tomese esto como un ejemplo en conjunto
 
 option(1,"1 - viajar",2 , 4 , ["viajar","turistear","conocer"],O1),
 option(2,"2 - estudiar", 3 , 1 ,["estudiar","aprender","perfeccionarme"],O2),
@@ -46,8 +53,10 @@ systemLogin(S10,"user1",S11).
 %systemAddUser(S11,"user4",S12), 
 %systemLogin(S12,"user8",S13), %Esto saldra false, ya que no es el mismo usuario de la funcion anterior
 
-%SCRIPT DE PRUEBAS Nº2
+%SCRIPT DE PRUEBAS Nº2 LABORATORIO SCHEME ADAPATADO A PROLOG
 %Adapte un poco este script para hacer funciona mi implementacion
+%Esta es una adapatacion personal, puede diferir con respecto a la implementacion del profesor
+%Tomese como ejemplo en conjunto
 
 %chatbot 0
 option(1, "1 - viajar", 1 , 1 ,["viajar","turistear","conocer"],O1),
@@ -141,10 +150,30 @@ systemLogout(S106,S107),
 systemAddUser(S107,"user99",S200). %La idea se vuelve a repetir si se desea ingresar otros usuarios.
 
 
+%SCRIPT N1 DE PRUEBAS 
+%he realizado algunos ajustes, para que pueda implementarse correctamente, sobre todo a la parte de adduser, login y logout
+%Ademas hay una adaptacion personal que he realizado, readaptando el codigo scheme a prolog, puede diferir de este codigo
 
-
-
-
+option(1, "1) Viajar", 2, 1, ["viajar", "turistear", "conocer"], OP1),
+option(2, "2) Estudiar", 2, 1, ["estudiar", "aprender", "perfeccionarme"], OP2),
+option(3, "3) Comer", 2, 1, ["comer", "aprender"], OP3),
+flow(1, "flujo1", [OP1, OP2], F10),
+flowAddOption(F10, OP3, F11),
+%flowAddOption(F10, OP2, F12), %si esto se descomenta, debe dar false, porque es opción con id duplicada.
+chatbot(0, "Inicial", "Bienvenido\n¿Qué te gustaría hacer?", 1, [F11], CB0), %solo añade una ocurrencia de F11
+system("Chatbots Paradigmas", 0, [CB0], S0),
+%systemAddChatbot(S0, CB0, S1), %si esto se descomenta, debe dar false, porque es chatbot id duplicado.
+systemAddUser(S0, "user1", S2),
+systemAddUser(S2, "user2", S3),
+%systemAddUser(S3, "user2", S4), %si esto se descomenta, debe dar false, porque es username duplicado
+systemAddUser(S3, "user3", S5),
+%systemLogin(S5, "user8", S6), %si esto se descomenta, debe dar false ;user8 no existe.
+%systemAddUser(S4,"user1",S5), %Segun mi implementacion el usuario añadido debe ser igual al usuario logeado, por ende el ultimo adduser debe ser igual al primer login
+systemLogin(S5, "user1", S7),
+%systemLogin(S7, "user2", S8), %si esto se descomenta, debe dar false, ya hay usuario con login
+systemLogout(S7, S9),
+%systemAddUser(S8,"user2",S9), %Complementando lo antes dicho en otra implementacion
+systemLogin(S9, "user2", S10).
 
 
 
