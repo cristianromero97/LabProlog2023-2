@@ -350,8 +350,8 @@ setUsuarios(Sistema, NuevoUsuario, NuevoSistema) :-
 % Metas Primarias: setUsuarioLogeado.
 % Metas Secundarias: chatHistory.
 setUsuarioLogeado(Sistema, NuevoUsuarioLogeado, NuevoSistema) :-
-    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,Usuario,_,Fecha,Sistema).
-    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,Usuario,NuevoUsuarioLogeado,Fecha,NuevoSistema).
+    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,NuevoChatbots,Usuario,_,Fecha,Sistema).
+    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,NuevoChatbots,Usuario,NuevoUsuarioLogeado,Fecha,NuevoSistema).
 
 %-----------------------------------------------------------------------------------------------------------------------------------
 
