@@ -44,13 +44,13 @@ chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,NuevoChatbots,Usuarios,Usuario
 % Metas Primarias: setUsuarios.
 % Metas Secundarias: chatHistory.
 setUsuarios(Sistema, NuevoUsuario, NuevoSistema) :-
-    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,_,UsuarioLogeado,Fecha,Sistema).
-    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,NuevoUsuario,UsuarioLogeado,Fecha,NuevoSistema ).
+    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,NuevoChatbots,_,UsuarioLogeado,Fecha,Sistema).
+    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,NuevoChatbots,NuevoUsuario,UsuarioLogeado,Fecha,NuevoSistema ).
 
 % Descripcion: Predicado para modificar el usuarioLogeado del chathistory.
 % Dominio: Sistema X NuevoUsuarioLogeado X NuevoSistema.
 % Metas Primarias: setUsuarioLogeado.
 % Metas Secundarias: chatHistory.
 setUsuarioLogeado(Sistema, NuevoUsuarioLogeado, NuevoSistema) :-
-    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,Usuario,_,Fecha,Sistema).
-    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,Usuario,NuevoUsuarioLogeado,Fecha,NuevoSistema).
+    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,NuevoChatbots,Usuario,_,Fecha,Sistema).
+    chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,NuevoChatbots,Usuario,NuevoUsuarioLogeado,Fecha,NuevoSistema).
