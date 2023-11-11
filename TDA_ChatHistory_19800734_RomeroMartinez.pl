@@ -33,10 +33,10 @@ mi_fecha(Fecha) :-
 
 %CONSTRUCTOR
 % Descripcion: Predicado para generar un ChatHistory.
-% Dominio: Nombre X InitialChatbotCodeLink X Chatbot X Usuarios X UsuarioLogeado X Fecha X ChatHistory
+% Dominio: Nombre X InitialChatbotCodeLink X Chatbot X NuevoChatbots X Usuarios X UsuarioLogeado X Fecha X ChatHistory
 % Metas Primarias: chatHistory.
 % Metas Secundarias: chatHistory.
-chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,Usuarios,UsuarioLogeado,Fecha,[Nombre,InitialChatbotCodeLink,Chatbot,Usuarios,UsuarioLogeado,Fecha] ).
+chatHistory(Nombre,InitialChatbotCodeLink,Chatbot,NuevoChatbots,Usuarios,UsuarioLogeado,Fecha,[Nombre,InitialChatbotCodeLink,Chatbot,NuevoChatbots,Usuarios,UsuarioLogeado,Fecha] ).
 
 %MODIFICADOR
 % Descripcion: Predicado para modificar el usuario del chathistory.
