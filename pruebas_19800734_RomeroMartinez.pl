@@ -10,9 +10,14 @@
 % VERSIÓN SWI-PROLOG: 9.0
 
 % IMPORTACION 
+%Atencion: Todas estas importaciones en caso de que fallen o no se puedan ejecutar, ir al archivo main o general y probar los ejemplos alli.
+%tda_system al llamar a todos los demas tambien funciona.
 %Ambos archivos son validos
-:-include(main_19800734_RomeroMartinez).
+%:-include(main_19800734_RomeroMartinez). %Todos los archivos funcionan, es decir, son equivalentes
+:-include(general_19800734_RomeroMartinez).
 %:-include(tda_system_19800734_RomeroMartinez).
+%:-consult("main_19800734_RomeroMartinez.pl").  %Para consultas, sino funciona dicho comando ir al archivo main, copiar y pegar los scripts de pruebas y ejemplos alli 
+%:-consult("general_19800734_RomeroMartinez.pl"). %Lo mismo en caso de que no funcione dicho comando.
 
 % INSTRUCCIONES INICIALES
 %El siguiente programa contiene los Script N1 y N2 del laboratorio Scheme adaptados a su formato Prolog
@@ -40,18 +45,19 @@ system("Chatbots Paradigmas",0,[CB0],S0),
 systemAddChatbot(S0,CB0,S100),  % Para no generar errores con lo demas se utiliza una salida que no afecte al siguiente codigo
 systemAddUser(S0,"user1",S1),
 systemAddUser(S1,"user2",S2),
-systemAddUser(S2,"user2",S3),
-systemAddUser(S3,"user3",S4),
-systemLogin(S4,"user3",S5),
-systemLogout(S5,S6),
-systemAddUser(S6,"user2",S7),
-systemLogin(S7,"user2",S8),
-systemLogout(S8,S9),
-systemAddUser(S9,"user1",S10),
-systemLogin(S10,"user1",S11).
+%systemAddUser(S2,"user2",S3), %saltara false porque se repite el usuario
+systemAddUser(S2,"user3",S3),
+systemLogin(S3,"user3",S4),
+systemLogout(S4,S5),
+%systemAddUser(S5,"user2",S6), %saltara false porque ya se añadio el usuario
+systemLogin(S5,"user2",S6),
+systemLogout(S6,S7),
+%systemAddUser(S7,"user1",S8), %saltara false porque ya se añadio el usuario
+systemLogin(S7,"user1",S8),
+systemLogout(S8,S9).
 
-%systemAddUser(S11,"user4",S12), 
-%systemLogin(S12,"user8",S13), %Esto saldra false, ya que no es el mismo usuario de la funcion anterior
+%systemAddUser(S0,"user99",S2), %añadiendo otro usario  
+%systemLogin(S3,"user8",S4), %Esto saldra false, ya que no es el mismo usuario de la funcion anterior
 
 %SCRIPT DE PRUEBAS Nº2 LABORATORIO SCHEME ADAPATADO A PROLOG
 %Adapte un poco este script para hacer funciona mi implementacion
@@ -102,14 +108,14 @@ system("Chatbots Paradigmas",0,[CB0,CB0,CB1,CB2],S0),
 systemAddChatbot(S0,CB0,S99), 
 systemAddUser(S0,"user1",S1),   
 systemAddUser(S1,"user2",S2),
-systemAddUser(S2,"user2",S3),
-systemAddUser(S3,"user3",S5),
+$systemAddUser(S2,"user2",S3), %saltara un false, ya que se repite el usuario
+systemAddUser(S2,"user3",S5),
 %systemLogin(S5,"user8",S6), %saltara un false, no esta registrado y no es igual al valor antes indicado en adduser
 systemLogin(S5,"user1",S6), %Para que funcione el valor del usuario debe ser igual al ultimo valor registrado por addUser
-%systemLogin(S6,"user3",S7), 
-%systemLogin(S7,"user2",S8),
-systemLogin(S7,"user2",S8), %Dara el resultado debido a que es el mismo valor que el anterior
-systemLogout(S7,S8).
+systemLogin(S6,"user3",S7), 
+systemLogin(S7,"user2",S8),
+%systemLogin(S7,"user2",S8), %Dara el resultado debido a que es el mismo valor que el anterior, como es repetido queria ver que pasaba
+systemLogout(S8,S9).
 
 
 %Aparpatado de Ejemplos Extra
