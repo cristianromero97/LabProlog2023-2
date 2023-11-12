@@ -105,7 +105,6 @@ systemAddUser(Sistema, NombreUsuario, NuevoSistema) :-
 % Metas Primarias: systemAddUser.
 % Metas Secundarias:  systemAddUser , userExists.
 systemAddUser(Sistema, NombreUser, Newsistema) :-
-    systemAddUser(Sistema, NombreUsuario, Sistema) :-
     userExists(NombreUsuario, Sistema).
 
 % Descripcion: Predicado que realiza el inicio de sesión de un usuario en un sistema.
